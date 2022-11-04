@@ -5,7 +5,7 @@ src-git helloworld https://github.com/fw876/helloworld
 src-git kenzo https://github.com/kenzok8/openwrt-packages
 src-git small https://github.com/kenzok8/small
 
-内核修改
+#内核修改
 /target/linux/x86/Makefile  修改 KERNEL_PATCHVER:=内核版本
 
 #修改默认IP地址
@@ -19,11 +19,11 @@ lede/package/lean/default-settings/files/zzz-default-settings （注意OpenWrt�
 lede/package/base-files/files/etc/banner
 
 
-修改默认主题界面
+#修改默认主题界面
 lede/feeds/luci/collections/luci/Makefile文件更改默认主题
 lede/feeds/luci/collections/luci-ssl-nginx/Makefile
 lede/feeds/luci/collections/luci-ssl-openssl/Makefile
-这三个文件都要修改默认主题名字，不然后面编译可能会报错。
+这三个文件都要修改默认主题名字，不然后面编译可能会报错
 
 #克隆源码插件库
 cd lede/package/lean
