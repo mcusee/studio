@@ -27,3 +27,5 @@ lede/feeds/luci/collections/luci-ssl-openssl/Makefile
 cd lede/package/lean
 git clone https://github.com/rufengsuixing/luci-app-adguardhome.git
 
+#给tmp权限，方便下载
+sudo chmod -R 777 tmp
