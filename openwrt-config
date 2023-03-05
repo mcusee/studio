@@ -18,6 +18,8 @@ lede/package/lean/default-settings/files/zzz-default-settings （注意OpenWrt�
 lede/package/base-files/files/etc/banner
 
 #修改默认主题界面
+cd /lede/feeds/luci/themes
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git luci-theme-argon-18.06
 lede/feeds/luci/collections/luci/Makefile文件更改默认主题
 lede/feeds/luci/collections/luci-ssl-nginx/Makefile
 lede/feeds/luci/collections/luci-ssl-openssl/Makefile
