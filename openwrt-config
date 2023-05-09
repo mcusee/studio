@@ -31,3 +31,8 @@ git clone https://github.com/rufengsuixing/luci-app-adguardhome.git
 
 #给tmp权限，方便下载
 sudo chmod -R 777 tmp
+
+
+网络图标icons
+运行了 2个 ./scripts/feeds 命令后，在这个目录里
+feeds/luci/modules/luci-base/htdocs/luci-static/resources/icons
