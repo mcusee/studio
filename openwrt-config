@@ -36,3 +36,17 @@ sudo chmod -R 777 tmp
 网络图标icons
 运行了 2个 ./scripts/feeds 命令后，在这个目录里
 feeds/luci/modules/luci-base/htdocs/luci-static/resources/icons
+
+修复shadowsocks-libev    feeds/small/shadowsocks-libev/Makefile   加入-DWITH_DOC_HTML=OFF \
+
+CMAKE_OPTIONS += \
+	-DWITH_STATIC=OFF \
+	-DWITH_EMBEDDED_SRC=ON \
+	-DWITH_DOC_HTML=OFF \
+	-DWITH_DOC_MAN=OFF \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DBUILD_TESTING=OFF \
+	-DENABLE_CONNMARKTOS=OFF \
+	-DENABLE_NFTABLES=OFF
+
+修复xray-plugin：feeds/small/xray-plugin/Makefile  正确验证PKG_HASH:=1150968f8791df884ce0ab5b2dbc870496088c90b5ffcc7f21497075aab7b1b5
