@@ -23,10 +23,14 @@ else
     git reset --hard origin/master
     echo "更新完成"
 fi
+echo "================================================="
+echo "第二次更新...确认更新完成"
+echo "================================================="
+git pull
 
-echo "==============================="
+echo "================================================="
 echo "处理 feeds.conf.default 是否已是目标状态..."
-echo "==============================="
+echo "================================================="
 if grep -q "^src-git luci https://github.com/coolsnowwolf/luci.git$" feeds.conf.default \
    && ! grep -q "^[^#].*luci\.git;openwrt-23\.05" feeds.conf.default \
    && ! grep -q "^[^#].*luci\.git;openwrt-24\.10" feeds.conf.default
