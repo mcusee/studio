@@ -84,6 +84,8 @@ rm -rf feeds/kenzo/luci-app-argon-config
 rm -rf feeds/kenzo/luci-app-adguardhome
 rm -rf feeds/kenzo/luci-theme-argon
 rm -rf feeds/kenzo/adguardhome
+rm -rf feeds/small/luci-app-fchomo package/feeds/small/luci-app-fchomo
+rm -rf feeds/kenzo/luci-theme-alpha package/feeds/kenzo/luci-theme-alpha
 
 echo "========================================"
 echo "修改本地文件"
