@@ -47,12 +47,7 @@ else
 
     echo "修改完成"
 fi
-
-echo "==============================="
-echo "更新feeds.conf.default"
-echo "==============================="
-./scripts/feeds update -a
-./scripts/feeds install -a
+echo "=============== 修改完成！==============="
 
 echo "========================================"
 echo "添加软件源并更新更新feeds.conf.default"
@@ -71,45 +66,29 @@ else
     echo "添加 small..."
     sed -i '1i src-git small https://github.com/kenzok8/small' feeds.conf.default
 fi
-git pull
+echo "=============== 更新源码 ==============="
 ./scripts/feeds update -a
-./scripts/feeds install -a
+echo "=============== 更新完成 ==============="
 
 echo "========================================"
-echo "删除不需要的插件"
+echo "清理不需要的插件"
 echo "========================================"
+echo "→ 清理 feeds/ 下的源目录..."
+
 rm -rf feeds/packages/net/adguardhome
 rm -rf feeds/luci/themes/luci-theme-argon
 rm -rf feeds/kenzo/luci-app-argon-config
 rm -rf feeds/kenzo/luci-app-adguardhome
+rm -rf feeds/kenzo/smartdns
+rm -rf feeds/kenzo/luci-app-smartdns
 rm -rf feeds/kenzo/luci-theme-argon
 rm -rf feeds/kenzo/adguardhome
-rm -rf feeds/small/luci-app-fchomo package/feeds/small/luci-app-fchomo
-rm -rf feeds/kenzo/luci-theme-alpha package/feeds/kenzo/luci-theme-alpha
-
-echo "========================================"
-echo "修改本地文件"
-echo "========================================"
-echo "修改默认IP"
-sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/luci/bin/config_generate
-
-echo "设置默认主题为 argon"
-sed -i "s/bootstrap/argon/g" feeds/luci/collections/luci/Makefile
-sed -i "s/Bootstrap/argon/g" feeds/luci/collections/luci/Makefile
-
-echo "修改固件品牌名称"
-sed -i 's/LEDE/OpenWrt/g' package/base-files/files/bin/config_generate
-sed -i 's/LEDE/OpenWrt/g' package/base-files/luci/bin/config_generate
-sed -i 's/LEDE/OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
-
-echo "修改 x86 内核版本为 5.15..."
-sed -i 's/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=5.15/' target/linux/x86/Makefile
-echo "修改完成"
+rm -rf feeds/small/luci-app-fchomo
+rm -rf feeds/kenzo/luci-theme-alpha
 
 echo "==============================="
 echo "添加插件"
 echo "==============================="
-
 # luci-theme-argon
 if [ -d "package/downloads/luci-theme-argon" ]; then
     echo "luci-theme-argon 已存在，跳过"
@@ -125,6 +104,45 @@ else
     echo "正在克隆 luci-app-adguardhome..."
     git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/luci-app-adguardhome
 fi
+
+echo "=============== 安装插件！==============="
+./scripts/feeds update -a
+./scripts/feeds install -a
+echo "=============== 安装完成！==============="
+
+echo "→ 清理索引 package/feeds/ 下的软链接..."
+
+rm -f package/feeds/packages/adguardhome
+rm -f package/feeds/luci/luci-theme-argon
+rm -f package/feeds/kenzo/luci-app-argon-config
+rm -f package/feeds/kenzo/luci-app-adguardhome
+rm -f package/feeds/kenzo/smartdns
+rm -f package/feeds/kenzo/luci-app-smartdns
+rm -f package/feeds/kenzo/luci-theme-argon
+rm -f package/feeds/kenzo/adguardhome
+rm -f package/feeds/small/luci-app-fchomo
+rm -f package/feeds/kenzo/luci-theme-alpha
+echo "============= 清理索引完成！============="
+
+echo "========================================"
+echo "修改本地文件"
+echo "========================================"
+
+echo "修改 x86 内核版本为 5.15..."
+sed -i 's/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=5.15/' target/linux/x86/Makefile
+echo "修改完成"
+
+echo "修改默认IP"
+sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/luci/bin/config_generate
+
+echo "设置默认主题为 argon"
+sed -i "s/bootstrap/argon/g" feeds/luci/collections/luci/Makefile
+sed -i "s/Bootstrap/argon/g" feeds/luci/collections/luci/Makefile
+
+echo "修改固件品牌名称"
+sed -i 's/LEDE/OpenWrt/g' package/base-files/files/bin/config_generate
+sed -i 's/LEDE/OpenWrt/g' package/base-files/luci/bin/config_generate
+sed -i 's/LEDE/OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
 
 echo "克隆仓库到 studio 目录"
 rm -rf studio
