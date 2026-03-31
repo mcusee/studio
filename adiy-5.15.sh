@@ -104,6 +104,21 @@ else
     git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/luci-app-adguardhome
 fi
 
+echo "========================================"
+echo "更新 luci-app-passwall"
+echo "========================================"
+rm -rf feeds/small/luci-app-passwall
+
+git clone --depth 1 --filter=blob:none --sparse \
+  https://github.com/Openwrt-Passwall/openwrt-passwall.git temp-passwall && \
+
+cd temp-passwall && \
+git sparse-checkout set luci-app-passwall && \
+cd .. && \
+
+mv temp-passwall/luci-app-passwall feeds/small/ && \
+rm -rf temp-passwall && \
+
 echo "=============== 安装插件！==============="
 ./scripts/feeds update -a
 ./scripts/feeds install -a
