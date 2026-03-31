@@ -2,7 +2,6 @@ echo "==============================="
 echo "开始执行 DIY 自定义脚本"
 echo "==============================="
 
-
 if [ ! -d "lede" ]; then
     echo "未发现 lede 目录，开始克隆仓库..."
     git clone https://github.com/coolsnowwolf/lede
